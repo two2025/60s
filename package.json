@@ -17,7 +17,7 @@
     "bumpp": "^10.0.3",
     "prettier": "^3.5.3",
     "typescript": "^5.8.2",
-    "wrangler": "^4.26.0"
+    "wrangler": "^4.28.1"
   },
   "scripts": {
     "dev": "DEV=1 PORT=4398 node --no-warnings --experimental-transform-types --watch node.ts",
