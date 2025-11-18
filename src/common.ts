@@ -30,8 +30,28 @@ export class Common {
   static chromeUA =
     'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36'
 
+  // static buildJson(data: boolean | number | string | object | null, code = 200, message = COMMON_MSG) {
+  //   const response = { code, message, data }
+
+  //   if (config.debug) {
+  //     return {
+  //       ...response,
+  //       __debug__: Common.getApiInfo(),
+  //     }
+  //   }
+
+  //   return response
+  // }
   static buildJson(data: boolean | number | string | object | null, code = 200, message = COMMON_MSG) {
-    const response = { code, message, data }
+    const response: any = { code, message }
+    
+    // 如果 data 是对象，将其属性展开到顶层
+    if (data && typeof data === 'object' && !Array.isArray(data)) {
+      Object.assign(response, data)
+    } else {
+      // 如果 data 是基本类型或数组，保持原来的 data 字段
+      response.data = data
+    }
 
     if (config.debug) {
       return {
