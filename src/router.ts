@@ -2,6 +2,7 @@ import { Router } from '@oak/oak/router'
 import { Common } from './common.ts'
 import { serviceLove } from './modules/love/love.module.ts'
 import { service60s } from './modules/60s.module.ts'
+import { service60sRss } from './modules/60s-rss.module.ts'
 import { serviceAINews } from './modules/ai-news.module.ts'
 import { serviceAnswer } from './modules/answer/answer.module.ts'
 import { serviceAwesomeJs } from './modules/awesome-js/awesome-js.module.ts'
@@ -44,8 +45,12 @@ import { serviceKuan } from './modules/kuan.module.ts'
 import { serviceLyric } from './modules/lyric.module.ts'
 import { serviceMoyu } from './modules/moyu.module.ts'
 import { serviceFuelPrice } from './modules/fuel-price/fuel-price.module.ts'
+import { GoldPriceService } from './modules/gold-price.module.ts'
+import { serviceQuark } from './modules/quark.module.ts'
 
 // import { serviceSlackingCalendar } from './modules/slacking-calendar/slacking-calendar.module.ts'
+
+const serviceGoldPrice = new GoldPriceService()
 
 export const rootRouter = new Router()
 
@@ -88,6 +93,7 @@ export const appRouter = new Router({
 
 // === 以下为已发布的正式接口 ===
 appRouter.get('/60s', service60s.handle())
+appRouter.get('/60s/rss', service60sRss.handle())
 appRouter.get('/answer', serviceAnswer.handle())
 appRouter.get('/baike', serviceBaike.handle())
 appRouter.get('/bili', serviceBili.handle())
@@ -115,6 +121,7 @@ appRouter.get('/dad-joke', serviceDadJoke.handle())
 appRouter.get('/rednote', serviceRednote.handle())
 appRouter.get('/dongchedi', serviceDongchedi.handle())
 appRouter.get('/moyu', serviceMoyu.handle())
+appRouter.get('/quark', serviceQuark.handle())
 
 appRouter.get('/health', serviceHealth.handle())
 appRouter.get('/password', servicePassword.handle())
@@ -144,6 +151,7 @@ appRouter.get('/color/palette', serviceColor.handlePalette())
 
 appRouter.all('/lyric', serviceLyric.handle())
 appRouter.all('/fuel-price', serviceFuelPrice.handle())
+appRouter.get('/gold-price', serviceGoldPrice.handle())
 
 // === 以下为支持 body 解析参数的接口 ===
 appRouter.all('/og', serviceOG.handle())
