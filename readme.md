@@ -3,6 +3,7 @@
 ![Update Status](https://github.com/vikiboss/60s-static-host/workflows/schedule/badge.svg) ![GitHub](https://img.shields.io/github/v/release/two2025/60s?label=GitHub) ![Docker](https://img.shields.io/docker/v/two2025/60s?style=flat&label=Docker) ![Node.js](https://img.shields.io/badge/Node.js-6DA55F?logo=node.js&logoColor=white) ![Bun](https://img.shields.io/badge/Bun-%23000000.svg?logo=bun&logoColor=white) ![Deno](https://img.shields.io/badge/Deno-000000?logo=deno&logoColor=white) [![群](https://img.shields.io/badge/%E4%BC%81%E9%B9%85%E7%BE%A4-595941841-ff69b4)](https://qm.qq.com/q/RpJXzgfAMG)
 
 
+
 ## ⚖️ API 实现原则和使用建议
 
 - 尽可能采用官方、权威的数据源头，保证准确性和可用性
@@ -213,6 +214,7 @@ npm install && npx wrangler publish
 |             *斌             | 12.90  | Alipay |                   -                    |
 |             *杰             | 20.00  | Alipay |                   -                    |
 |            **杰             |  9.90  | Alipay |                   -                    |
+|             *瑞             | 666.66 | Alipay |               100 杯咖啡               |
 |             ---             |  ---   |  ---   |                  ---                   |
 |             Ko.             | 11.66  |   QQ   |                   -                    |
 |           yijiong           | 15.00  |   QQ   |            a cup of coffee             |

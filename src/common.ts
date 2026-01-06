@@ -206,24 +206,54 @@ export class Common {
     }
   }
 
+  static debug(...args: any[]) {
+    if (config.debug) {
+      console.log('[debug]', ...args)
+    }
+  }
+
   static async tryRepoUrl(options: { repo: string; path: string; branch?: string; alternatives?: string[] }) {
     const { repo, path, branch = 'main', alternatives = [] } = options
 
-    const urls = [
-      `https://cdn.jsdmirror.com/gh/${repo}/${path}`,
-      `https://raw.githubusercontent.com/${repo}/refs/heads/${branch}/${path}`,
-      `https://cdn.jsdelivr.net/gh/${repo}/${path}`,
-      ...alternatives,
-    ]
+    const urls = config.overseas_first
+      ? [
+          `https://raw.githubusercontent.com/${repo}/refs/heads/${branch}/${path}`,
+          `https://cdn.jsdelivr.net/gh/${repo}/${path}`,
+          ...alternatives,
+          `https://cdn.jsdmirror.com/gh/${repo}/${path}`,
+        ]
+      : [
+          `https://cdn.jsdmirror.com/gh/${repo}/${path}`,
+          `https://raw.githubusercontent.com/${repo}/refs/heads/${branch}/${path}`,
+          `https://cdn.jsdelivr.net/gh/${repo}/${path}`,
+          ...alternatives,
+        ]
 
     for (const url of urls) {
       try {
+        Common.debug(`Trying URL: ${url}`)
+
         const controller = new AbortController()
-        const timeoutId = setTimeout(() => controller.abort(), 2_000)
-        const response = await fetch(url, { signal: controller.signal })
+        const timeoutId = setTimeout(() => controller.abort(), 3_000)
+
+        const response = await fetch(url, {
+          signal: controller.signal,
+          headers: {
+            'User-Agent': Common.chromeUA,
+            'X-Real-IP': '157.255.219.143',
+            'X-Forwarded-For': '157.255.219.143',
+          },
+        })
+
         clearTimeout(timeoutId)
-        if (response.ok) return response
-      } catch {}
+
+        if (response.ok) {
+          Common.debug(`Successful URL: ${url}`)
+          return response
+        }
+      } catch {
+        Common.debug(`Failed URL: ${url}`)
+      }
     }
 
     return null

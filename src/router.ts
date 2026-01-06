@@ -47,6 +47,7 @@ import { serviceMoyu } from './modules/moyu.module.ts'
 import { serviceFuelPrice } from './modules/fuel-price/fuel-price.module.ts'
 import { GoldPriceService } from './modules/gold-price.module.ts'
 import { serviceQuark } from './modules/quark.module.ts'
+import { serviceWhois } from './modules/whois.module.ts'
 
 // import { serviceSlackingCalendar } from './modules/slacking-calendar/slacking-calendar.module.ts'
 
@@ -159,6 +160,7 @@ appRouter.all('/hash', serviceHash.handle())
 
 appRouter.all('/fanyi', serviceFanyi.handle())
 appRouter.all('/fanyi/langs', serviceFanyi.handleLangs())
+appRouter.get('/whois', serviceWhois.handle())
 
 // === 以下为测试接口，beta 前缀，接口可能不稳定 ===
 appRouter.get('/beta/kuan', serviceKuan.handle())
