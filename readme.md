@@ -36,6 +36,13 @@ curl "https://60s.cccccc.life/v2/60s?encoding=image-proxy" --output "$(date +%Y-
 **📊 数据特性**
 
 
+- **数据源**: 微信公众号，详情参考 [这里](https://github.com/two2025/60s-static-host/blob/main/src/constants.ts#L4-L12)
+- **更新频率**: 每半小时自动尝试更新，正常情况最晚上午 10 点会更新
+- **数据处理**: [two2025/60s-static-host](https://github.com/two2025/60s-static-host) 仓库定时抓取
+- **响应速度**: 毫秒级缓存响应，全球 CDN 加速
+- **内容质量**: 精选 15 条国内外优质新闻 + 每日微语
+
+
 目前包含的接口如下，仍在持续增加中，全面的 API 文档已公开托管在 [Apifox](https://doc.cccccc.plus) 上。
 
 主域名: https://60s.cccccc.lfe 
