@@ -28,7 +28,7 @@
     "bumpp": "^10.3.2",
     "prettier": "^3.7.4",
     "typescript": "^5.9.3",
-    "wrangler": "^4.56.0"
+    "wrangler": "^4.59.1"
   },
   "scripts": {
     "dev:no-watch": "DEV=1 PORT=4398 node --disable-warning=ExperimentalWarning node.ts",
