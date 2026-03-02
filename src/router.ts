@@ -49,6 +49,7 @@ import { GoldPriceService } from './modules/gold-price.module.ts'
 import { serviceQuark } from './modules/quark.module.ts'
 import { serviceWhois } from './modules/whois.module.ts'
 import { olympicsService } from './modules/olympics.module.ts'
+import { serviceDoubanWeekly } from './modules/douban-weekly.module.ts'
 
 // import { serviceSlackingCalendar } from './modules/slacking-calendar/slacking-calendar.module.ts'
 
@@ -155,6 +156,12 @@ appRouter.all('/lyric', serviceLyric.handle())
 appRouter.all('/fuel-price', serviceFuelPrice.handle())
 appRouter.get('/gold-price', serviceGoldPrice.handle())
 appRouter.get('/olympics', olympicsService.handle())
+
+appRouter.get('/douban/weekly/movie', serviceDoubanWeekly.handle('movie'))
+appRouter.get('/douban/weekly/tv_chinese', serviceDoubanWeekly.handle('tv_chinese'))
+appRouter.get('/douban/weekly/tv_global', serviceDoubanWeekly.handle('tv_global'))
+appRouter.get('/douban/weekly/show_chinese', serviceDoubanWeekly.handle('show_chinese'))
+appRouter.get('/douban/weekly/show_global', serviceDoubanWeekly.handle('show_global'))
 
 // === 以下为支持 body 解析参数的接口 ===
 appRouter.all('/og', serviceOG.handle())
