@@ -1,4 +1,4 @@
-import { Common, dayjs } from '../common.ts'
+import { Common, dayjs, TZ_SHANGHAI } from '../common.ts'
 
 import type { RouterMiddleware } from '@oak/oak'
 
@@ -7,7 +7,8 @@ class ServiceTodayInHistory {
 
   handle(): RouterMiddleware<'/today_in_history'> {
     return async (ctx) => {
-      const data = await this.#fetch()
+      const date = ctx.request.url.searchParams.get('date')
+      const data = await this.#fetch(date ?? undefined)
 
       switch (ctx.state.encoding) {
         case 'text':
@@ -18,10 +19,7 @@ class ServiceTodayInHistory {
 
         case 'markdown':
           ctx.response.body = `# 历史上的今天 (${data.date})\n\n${data.items
-            .map(
-              (e, idx) =>
-                `### ${idx + 1}. [${e.title}](${e.link}) \`${e.year} 年\`\n\n${e.description}\n\n---\n`,
-            )
+            .map((e, idx) => `### ${idx + 1}. [${e.title}](${e.link}) \`${e.year} 年\`\n\n${e.description}\n\n---\n`)
             .join('\n')}`
           break
 
@@ -33,20 +31,19 @@ class ServiceTodayInHistory {
     }
   }
 
-  async #fetch() {
+  async #fetch(date = dayjs().tz(TZ_SHANGHAI).toISOString()) {
     type AnyObject<T = any> = Record<number | string | symbol, T>
 
-    const now = dayjs()
-    const today = now.format(`YYYY/M/D`)
+    const now = dayjs(date).tz(TZ_SHANGHAI)
     const todayField = now.format('MMDD')
     const monthAndDay = now.format('M-D')
 
-    if (this.cache.has(today)) {
+    if (this.cache.has(monthAndDay)) {
       return {
         date: monthAndDay,
         month: now.month() + 1,
         day: now.date(),
-        items: this.cache.get(today)!.map((e) => ({
+        items: this.cache.get(monthAndDay)!.map((e) => ({
           title: e.title,
           year: e.year,
           description: e.desc,
@@ -56,7 +53,7 @@ class ServiceTodayInHistory {
       }
     }
 
-    const res = await fetch(this.getHistoryApi())
+    const res = await fetch(this.getHistoryApi(now.month() + 1))
     const monthEvents: AnyObject<AnyObject<AnyObject[]>> = await res.json()
     const todayEvents = monthEvents?.[String(now.format('MM'))]?.[todayField] ?? []
 
@@ -77,7 +74,7 @@ class ServiceTodayInHistory {
       }
     })
 
-    this.cache.set(today, modifiedTodayEvents)
+    this.cache.set(monthAndDay, modifiedTodayEvents)
 
     return {
       date: monthAndDay,
@@ -95,8 +92,7 @@ class ServiceTodayInHistory {
     }
   }
 
-  private getHistoryApi = () => {
-    const month = new Date().getMonth() + 1
+  private getHistoryApi = (month = dayjs().tz(TZ_SHANGHAI).month() + 1) => {
     const filename = `${String(month).padStart(2, '0')}.json`
     return `https://baike.baidu.com/cms/home/eventsOnHistory/${filename}`
   }
