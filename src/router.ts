@@ -48,8 +48,9 @@ import { serviceFuelPrice } from './modules/fuel-price/fuel-price.module.ts'
 import { GoldPriceService } from './modules/gold-price.module.ts'
 import { serviceQuark } from './modules/quark.module.ts'
 import { serviceWhois } from './modules/whois.module.ts'
-import { olympicsService } from './modules/olympics.module.ts'
+import { olympicsService } from './modules/olympics/olympics.module.ts'
 import { serviceDoubanWeekly } from './modules/douban-weekly.module.ts'
+import { serviceITNews } from './modules/it-news.module.ts'
 
 // import { serviceSlackingCalendar } from './modules/slacking-calendar/slacking-calendar.module.ts'
 
@@ -118,6 +119,8 @@ appRouter.get('/weibo', serviceWeibo.handle())
 appRouter.get('/zhihu', serviceZhihu.handle())
 appRouter.get('/lunar', serviceLunar.handle())
 appRouter.get('/ai-news', serviceAINews.handle())
+appRouter.get('/it-news', serviceITNews.handle())
+appRouter.get('/it-news/rank', serviceITNews.handleRank())
 appRouter.get('/awesome-js', serviceAwesomeJs.handle())
 appRouter.get('/qrcode', serviceQRCode.handle())
 appRouter.get('/dad-joke', serviceDadJoke.handle())
@@ -125,6 +128,7 @@ appRouter.get('/rednote', serviceRednote.handle())
 appRouter.get('/dongchedi', serviceDongchedi.handle())
 appRouter.get('/moyu', serviceMoyu.handle())
 appRouter.get('/quark', serviceQuark.handle())
+appRouter.get('/whois', serviceWhois.handle())
 
 appRouter.get('/health', serviceHealth.handle())
 appRouter.get('/password', servicePassword.handle())
@@ -156,6 +160,7 @@ appRouter.all('/lyric', serviceLyric.handle())
 appRouter.all('/fuel-price', serviceFuelPrice.handle())
 appRouter.get('/gold-price', serviceGoldPrice.handle())
 appRouter.get('/olympics', olympicsService.handle())
+appRouter.get('/olympics/events', olympicsService.handleEventList())
 
 appRouter.get('/douban/weekly/movie', serviceDoubanWeekly.handle('movie'))
 appRouter.get('/douban/weekly/tv_chinese', serviceDoubanWeekly.handle('tv_chinese'))
@@ -169,7 +174,6 @@ appRouter.all('/hash', serviceHash.handle())
 
 appRouter.all('/fanyi', serviceFanyi.handle())
 appRouter.all('/fanyi/langs', serviceFanyi.handleLangs())
-appRouter.get('/whois', serviceWhois.handle())
 
 // === 以下为测试接口，beta 前缀，接口可能不稳定 ===
 appRouter.get('/beta/kuan', serviceKuan.handle())

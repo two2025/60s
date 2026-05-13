@@ -13,5 +13,5 @@ export const config = {
   encodingParamName: process.env.ENCODING_PARAM_NAME || 'encoding',
 }
 
-//export const COMMON_MSG = `获取成功，开源地址 ${config.github}，反馈群 ${config.group}`
 export const COMMON_MSG = `获取成功！`
+

@@ -1,15 +1,18 @@
 # ⏰ 60s API
 
+![Update Status](https://github.com/vikiboss/60s-static-host/workflows/schedule/badge.svg) ![GitHub](https://img.shields.io/github/v/release/vikiboss/60s?label=GitHub) ![Docker](https://img.shields.io/docker/v/vikiboss/60s?style=flat&label=Docker) ![Node.js](https://img.shields.io/badge/Node.js-6DA55F?logo=node.js&logoColor=white) ![Bun](https://img.shields.io/badge/Bun-%23000000.svg?logo=bun&logoColor=white) ![Deno](https://img.shields.io/badge/Deno-000000?logo=deno&logoColor=white) [![群](https://img.shields.io/badge/%E4%BC%81%E9%B9%85%E7%BE%A4-595941841-ff69b4)](https://qm.qq.com/q/RpJXzgfAMG)
 ![Update Status](https://github.com/vikiboss/60s-static-host/workflows/schedule/badge.svg) ![GitHub](https://img.shields.io/github/v/release/two2025/60s?label=GitHub) ![Docker](https://img.shields.io/docker/v/two2025/60s?style=flat&label=Docker) ![Node.js](https://img.shields.io/badge/Node.js-6DA55F?logo=node.js&logoColor=white) ![Bun](https://img.shields.io/badge/Bun-%23000000.svg?logo=bun&logoColor=white) ![Deno](https://img.shields.io/badge/Deno-000000?logo=deno&logoColor=white) [![群](https://img.shields.io/badge/%E4%BC%81%E9%B9%85%E7%BE%A4-595941841-ff69b4)](https://qm.qq.com/q/RpJXzgfAMG)
 
 
-一系列 **高质量、开源、可靠、全球 CDN 加速** 的开放 API 集合，让你用最简单的方式获取最准确的数据。
+
+一系列 **高质量、开源、可靠、全球 CDN 加速** 的开放 API 集合，让你用最简单的方式获取最准确的数据。构建于现代技术栈 [Deno](https://deno.com/)，托管在 [Deno Deploy](https://deno.com/deploy)，同时支持 [Docker](https://docker.com)、[Cloudflare Workers](https://www.cloudflare.com/zh-cn/developer-platform/products/workers/)、[Bun](https://bun.sh/) 和 [Node.js](https://nodejs.org/) 等多种部署方式。
 
 ## ⚖️ API 实现原则和使用建议
 
 - 尽可能采用官方、权威的数据源头，保证准确性和可用性
 - 对日更数据采取缓存加速策略，对用户无感、毫秒级响应
 - 为了追求更快的响应，可查看源码直接使用对应 API 的原数据（但原始数据量大、字段繁多，不易处理）
+
 
 
 ## 🎯 项目起源
@@ -49,7 +52,9 @@ curl "https://60s.cccccc.life/v2/60s?encoding=image-proxy" --output "$(date +%Y-
 
 ## 🤖 Agent Skills
 
+
 本项目支持配合各种 AI 大模型以 Agent Skills 的方式使用，你可以在 [skills.sh](https://skills.sh/?q=two2025/60s-skills) 查看相关 skills，更多详情可参考 [two2025/60s-skills](https://github.com/two2025/60s-skills) 源码仓库，欢迎贡献。
+
 
 ## 🎯 API 设计理念
 主域名: https://60s.cccccc.lfe 
