@@ -42,6 +42,26 @@ export class Common {
 
     return response
   }
+  // static buildJson(data: boolean | number | string | object | null, code = 200, message = COMMON_MSG) {
+  //   const response: any = { code, message }
+    
+  //   // 如果 data 是对象，将其属性展开到顶层
+  //   if (data && typeof data === 'object' && !Array.isArray(data)) {
+  //     Object.assign(response, data)
+  //   } else {
+  //     // 如果 data 是基本类型或数组，保持原来的 data 字段
+  //     response.data = data
+  //   }
+
+  //   if (config.debug) {
+  //     return {
+  //       ...response,
+  //       __debug__: Common.getApiInfo(),
+  //     }
+  //   }
+
+  //   return response
+  // }
 
   static requireArguments(name: string | string[], response: RouterContext<any, Record<string, any>>['response']) {
     response.status = 400
@@ -91,7 +111,8 @@ export class Common {
     if (!process.env.DEV) return link
     const url = new URL(link)
     url.searchParams.set('proxy-host', url.host)
-    url.host = 'proxy.viki.moe'
+    // url.host = 'proxy.viki.moe'
+    url.host = '60s.woaicc.cc'
     return url.toString()
   }
 
@@ -174,9 +195,9 @@ export class Common {
 
   static getApiInfo() {
     return {
-      api_name: '60s-api',
-      api_version: pkg.version,
-      api_docs: 'https://docs.60s-api.viki.moe',
+      api_name: '60s',
+    //   api_version: pkg.version,
+    //   api_docs: 'https://docs.60s-api.viki.moe',
       author: config.author,
       user_group: config.group,
       github_repo: config.github,
